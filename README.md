@@ -47,3 +47,4 @@ For a given project's dependency tree, update each clone/fork to the current ver
   - [ ] If local (by having run `clone`, this is just a test if it already exists locally.
   - [ ] If remote (by having run `fork`, test if the supplied user credential owns the forked repo remotely).
 - [ ] Make `fork` work for private repos by pushing a private fork instead of using the standard GitHub fork API.
+- [ ] Currently gets the repo name from the first fetch remote; robustly handle the case when there's more than one, interactively and with an option argument
