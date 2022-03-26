@@ -2,9 +2,9 @@
 
 Automatically clone and/or fork every repo in the dependency tree of a project.
 
-There have been several high-profile breakages in the open-source software supply-chain. Forking dependencies can mitigate codebases disappearing, changing in undesirable ways, or being taken over and being injected with malware. Keeping those forks on a server you control can prevent delays caused by service incidents in GitHub, AWS, etc. If that server is colocated with the build machine on a LAN, build times may see improved performance as well.
+High-profile incidents in the open-source software supply-chain are not merely theoretical; they're a real risk, and happen with some regularity. Forking dependencies can mitigate [packages disappearing](https://news.ycombinator.com/item?id=16092132), [changing in undesirable ways](https://news.ycombinator.com/item?id=29863672), or being [taken over](https://news.ycombinator.com/item?id=29122098) and/or [injected with malware](https://news.ycombinator.com/item?id=30717382). Keeping packages on a server you control can prevent delays caused by [service outages in GitHub](https://news.ycombinator.com/item?id=30790593), [AWS](https://news.ycombinator.com/item?id=29473630), etc. If that server is colocated with the build machine on a LAN, build times may see improved performance as well.
 
-However, manually forking every repo in a dependency tree that may contain thousands of codebases is impossible. We need an automated solution.
+However, manually forking every repo in a dependency tree that may contain thousands of packages is impossible. We need an automated solution.
 
 ## A note on terminology
 
@@ -31,15 +31,17 @@ For a given project's dependency tree, update each clone/fork to the current ver
 # TODO
 
 - [ ] Implement `clone` for each package manager:
-  - [ ] NPM
+  - [ ] NPM (see [`npm-ls`](https://docs.npmjs.com/cli/v6/commands/npm-ls))
   - [ ] Rubygems
-  - [ ] CocoaPods
+  - [ ] CocoaPods (see [`cocoapods-dependencies`](https://github.com/segiddins/cocoapods-dependencies))
   - [ ] SPM
-  - [ ] Pip
+  - [ ] Pip (see [`pipdeptree`](https://pypi.org/project/pipdeptree/))
+  - [ ] Homebrew
   - [ ] ...others?
 - [ ] Implement `fork` for:
   - [ ] GitHub
   - [ ] GitLab
+  - [ ] AWS CodeCommit
   - [ ] ...others?
 - [ ] Don't clone/fork repos that have already been forked. Reuse previous forks commonly used between two projects.
   - [ ] If local (by having run `clone`, this is just a test if it already exists locally.
