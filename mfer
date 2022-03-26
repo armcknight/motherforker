@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+
+from github import Github
+import argh
+from argh import arg
+
+@arg('access_token', help='The GitHub access token of the GitHub user whose repos should be synced')
+def clone(access_toke\
+    'Clone the repo associated with each dependency in the current project directory, based on any Brewfile.lock, Pipfile.lock, Podfile.lock, Gemfile.lock files present.'
+
+def sync():
