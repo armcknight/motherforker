@@ -37,6 +37,8 @@ For a given project's dependency tree, update each clone/fork to the current ver
   - [ ] SPM
   - [ ] Pip (see [`pipdeptree`](https://pypi.org/project/pipdeptree/))
   - [ ] Homebrew
+  - [ ] Nix
+  - [ ] ASDF
   - [ ] ...others?
 - [ ] Implement `fork` for:
   - [ ] GitHub
