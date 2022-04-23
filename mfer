@@ -5,9 +5,62 @@ import argh
 from argh import arg
 import os
 from git import Repo
+import re
+import json
+import subprocess
+import requests
+import tarfile
 
-@arg('access_token', help='The GitHub access token of the GitHub user whose repos should be synced')
-def clone(access_toke\
+@arg('path', help='The top-level path under which all dependencies\' sources should be cloned.')
+@arg('github_access_token', help='The GitHub access token of the GitHub user owning an SSH key to be used to clone the necessary repositories.')
+def clone(path, github_access_token):
     'Clone the repo associated with each dependency in the current project directory, based on any Brewfile.lock, Pipfile.lock, Podfile.lock, Gemfile.lock files present.'
-    repo = Repo(os.getcwd())
-    project_name = repo.remotes.origin.url
+    cwd = os.getcwd()
+    repo = Repo(cwd)
+    project_name = re.match(r'.*/(.*).git', repo.remotes.origin.url).group(1)
+
+    brew_lockfile_path = os.path.join(cwd, 'Brewfile.lock.json')
+    with open(brew_lockfile_path) as f:
+        parsed = json.loads(f.read())
+        json_deps = parsed['entries']['brew']
+        keys = json_deps.keys()
+        print(f'{keys=}')
+        # for key in keys:
+        #     brew_info = subprocess.check_output(['brew', 'info', key], output='utf-8').strip()
+        #     formula_url = re.match(r'from: (.*)', brew_info).group(1)
+        #     formula_source = requests.get(formula_url)
+        #     source_url = re.match(r'url "(.*)"', formula_source.text).group(1)
+        #     source_response = requests.get(url, stream=True)
+        #     file = tarfile.open(fileobj=source_response.raw, mode="r|gz")
+        #     source_clone_path = os.path.join(path, project_name, 'Homebrew', key)
+        #     file.extractall(path=source_clone_path)
+
+    pip_lockfile_path = os.path.join(cwd, 'Pipfile.lock')
+    with open(pip_lockfile_path) as f:
+        parsed = json.loads(f.read())
+        json_deps = parsed['default']
+        keys = json_deps.keys()
+        print(f'{keys=}')
+
+    gem_lockfile_path = os.path.join(cwd, 'Gemfile.lock')
+    with open(gem_lockfile_path) as f:
+        contents = f.read()
+        if 'GEM' in contents:
+            gem_list_start = contents.index('GEM')
+        else:
+            gem_list_start = -1
+        if 'GIT' in contents:
+            git_list_start = contents.index('GIT')
+        else:
+            git_list_start = -1
+        if 'PATH' in contents:
+            path_list_start = contents.index('PATH')
+        else:
+            path_list_start = -1
+
+
+parser = argh.ArghParser()
+parser.add_commands([clone])
+
+if __name__ == '__main__':
+    parser.dispatch()
