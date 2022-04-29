@@ -45,6 +45,7 @@ For a given project's dependency tree, update each clone/fork to the current ver
   - [ ] GitLab
   - [ ] AWS CodeCommit
   - [ ] ...others?
+  - [ ] Fork submodule dependencies of any repos being forked
 - [ ] Don't clone/fork repos that have already been forked. Reuse previous forks commonly used between two projects.
   - [ ] If local (by having run `clone`, this is just a test if it already exists locally.
   - [ ] If remote (by having run `fork`, test if the supplied user credential owns the forked repo remotely).
