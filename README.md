@@ -38,7 +38,8 @@ For a given project's dependency tree, update each clone/fork to the current ver
   - [ ] Pip (see [`pipdeptree`](https://pypi.org/project/pipdeptree/))
   - [ ] Homebrew
   - [ ] Nix
-  - [ ] ASDF
+  - [ ] ASD
+  - [ ] Emacs (ELPA/MELPA/QELPA/straight.el)
   - [ ] ...others?
 - [ ] Implement `fork` for:
   - [ ] GitHub
