@@ -52,3 +52,4 @@ For a given project's dependency tree, update each clone/fork to the current ver
   - [ ] If remote (by having run `fork`, test if the supplied user credential owns the forked repo remotely).
 - [ ] Make `fork` work for private repos by pushing a private fork instead of using the standard GitHub fork API.
 - [ ] Currently gets the repo name from the first fetch remote; robustly handle the case when there's more than one, interactively and with an option argument
+- [ ] A way to include archived copies of blogs/websites inside other websites, like a site forker
